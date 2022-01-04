@@ -1,0 +1,13 @@
+name: FrozenRegions
+version: '${project.version}'
+main: org.infamousmc.frozenregions.Main
+api-version: 1.17
+authors: [ devJordan ]
+description: Private plugin
+depend: [WorldGuard]
+
+commands:
+  Frozenregions:
+    description: General plugin command.
+    aliases: [fr]
+    usage: "Usage: /frozenregions [reload]"

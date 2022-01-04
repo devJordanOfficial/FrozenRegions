@@ -1,0 +1,72 @@
+####################################################################
+###                                                              ###
+###                          Frozen Regions                      ###
+###                              Config                          ###
+###                                                              ###
+####################################################################
+
+# There are 2 types of effects which will be triggered when a playing is inside a
+# frozen region.
+#
+# Cooling: Cooling happens when a player has simply been inside the frozen region for too long
+# Freezing: Freezing happens when a player touches water
+
+###
+# COOLING
+###
+Cooling:
+  # Integer (Default 10)
+  # This is the amount of time before cooling begins to set in one the place has entered the region.
+  # Note that the unit of times (whether this value is seconds, minutes, hours) is defined below.
+  cooling-timer: 10
+  # String (Default M)
+  # This value is a single character which determines which unit of time will be used for 'cooling-timer:'
+  # If 'time-unit:' is an invalid character the default unit will be ticks.
+  # T = Ticks; S = Seconds; M = Minutes; H = Hours
+  time-unit: "M"
+
+  # Integer (Default 120)
+  # The amount of time (in seconds) after cooling has begun that the player will begin to take damage
+  # on top of the already increasingly intensive slowness.
+  damage-timer: 120
+
+  # Integer (Default 24)
+  # This value determines how often (in seconds) the player's slowness level will increase.
+  slowness-increments: 24
+
+  # Integer (Default 60)
+  # This value determines how long (in ticks; 20 ticks = 1 second) the slowness effect will take to
+  # wear off once the player has left the region.
+  persistent-delay: 60
+
+  # String (Supports color codes)
+  # This value is an actionbar displayed when the player begins to feel cold.
+  warning-actionbar: "&lYou are feeling incredibly &b&lcold&f&l."
+  # This value is an actionbar displayed when the player begins to take damage from cooling
+  damage-actionbar: "&lYou are &b&lfreezing &f&lto &b&ldeath&f&l!"
+
+###
+# FREEZING
+###
+Freezing:
+  # Integer (Default 20)
+  # This is the amount of time (in ticks; 20 ticks = 1 second) until a player will begin to freeze after
+  # touching water
+  freezing-timer: 20
+
+  # Integer (Default 160)
+  # This is the value (in ticks; 20 ticks = 1 second) until additional slowness starts to set in on top
+  # of the freezing effects slowness.
+  # Note that this was added because Minecraft's freezing effect does not slow the player down much when
+  # they are in water.
+  slowness-timer: 160
+
+
+  # Integer (Default 160)
+  # This value determines how long (in ticks; 20 ticks = 1 second) the slowness effect will take to
+  # wear off once the player has left the water.
+  persistent-delay: 160
+
+  # Integer (Default 160)
+  # This value determines how often (in seconds) the player's slowness level will increase.
+  slowness-increments: 160
