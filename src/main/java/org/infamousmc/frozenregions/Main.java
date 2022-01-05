@@ -15,6 +15,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -23,6 +24,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
@@ -116,9 +118,24 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     @EventHandler
+    public void switchGameMode(PlayerGameModeChangeEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        if (event.getNewGameMode().equals(GameMode.CREATIVE)) {
+            if (enteredRegion.contains(uuid))
+                enteredRegion.remove(uuid);
+            if (enteredWater.contains(uuid))
+                enteredWater.remove(uuid);
+        }
+    }
+
+    @EventHandler
     public void moveEvent(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
+
+        if (!player.getGameMode().equals(GameMode.SURVIVAL)) return;
 
         enterRegion(player);
 
